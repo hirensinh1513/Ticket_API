@@ -1,0 +1,407 @@
+openapi: 3.0.0
+info:
+  title: Ticket API
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterRequest'
+              - example:
+                  initialName: MR
+                  firstName: raj
+                  lastName: parmar
+                  contactNumber: 2151511515
+                  email: shiv1243@gmail.com
+                  password: secret
+                  role: employee
+            example:
+              initialName: MR
+              firstName: raj
+              lastName: parmar
+              contactNumber: 2151511515
+              email: shiv1243@gmail.com
+              password: secret
+              role: employee
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: shiv1243@gmail.com
+                  password: secret
+                  role: employee
+            example:
+              email: shiv1243@gmail.com
+              password: secret
+              role: employee
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /employee:
+    get:
+      tags:
+      - AllDetails
+      summary: getAllEmpDetails
+      operationId: getAllEmpDetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /employee/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The employee ID
+    patch:
+      tags:
+      - AllDetails
+      summary: updateEmpDetails
+      operationId: updateEmpDetails
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updateEmpDetailsRequest'
+              - example:
+                  initialName: MR
+                  firstName: Raviraj
+                  lastName: vaghela
+                  contactNumber: 99987454
+                  email: 123@gmail.com
+            example:
+              initialName: MR
+              firstName: Raviraj
+              lastName: vaghela
+              contactNumber: 99987454
+              email: 123@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - AllDetails
+      summary: deleteEmpdetails
+      operationId: deleteEmpdetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /employee/mydetails:
+    get:
+      tags:
+      - AllDetails
+      summary: getSingleEmpDetails
+      operationId: getSingleEmpDetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /ticket:
+    post:
+      tags:
+      - AllDetails
+      summary: createTicketDetails
+      operationId: createTicketDetails
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createTicketDetailsRequest'
+              - example:
+                  applicationdate: 31-07-2020
+                  relatedTo: Network
+                  description: facing some issues
+                  howManyDaysClosed: 10
+                  timeDays: 15
+            example:
+              applicationdate: 31-07-2020
+              relatedTo: Network
+              description: facing some issues
+              howManyDaysClosed: 10
+              timeDays: 15
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - AllDetails
+      summary: getAllTicketdetails
+      operationId: getAllTicketdetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  paths:
+  /ticket/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The ticket ID
+    patch:
+      tags:
+      - AllDetails
+      summary: updateTicketDetails
+      operationId: updateTicketDetails
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updateTicketDetailsRequest'
+              - example:
+                  applicationdate: 31/07/2000
+                  relatedTo: Hardware
+                  description: hardware problem
+            example:
+              applicationdate: 31/07/2000
+              relatedTo: Hardware
+              description: hardware problem
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - AllDetails
+      summary: deleteTicketdetails
+      operationId: deleteTicketdetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /ticket/myTicket:
+    get:
+      tags:
+      - AllDetails
+      summary: getSingleticketDetails
+      operationId: getSingleticketDetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - initialName
+      - firstName
+      - lastName
+      - contactNumber
+      - email
+      - password
+      - role
+      type: object
+      properties:
+        initialName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        contactNumber:
+          type: integer
+          format: int64
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      example:
+        initialName: MR
+        firstName: raj
+        lastName: parmar
+        contactNumber: 2151511515
+        email: shiv1243@gmail.com
+        password: secret
+        role: employee
+    updateEmpDetailsRequest:
+      title: updateEmpDetailsRequest
+      required:
+      - initialName
+      - firstName
+      - lastName
+      - contactNumber
+      - email
+      type: object
+      properties:
+        initialName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        contactNumber:
+          type: integer
+          format: int32
+        email:
+          type: string
+      example:
+        initialName: MR
+        firstName: Raviraj
+        lastName: vaghela
+        contactNumber: 99987454
+        email: 123@gmail.com
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      - role
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      example:
+        email: shiv1243@gmail.com
+        password: secret
+        role: employee
+    createTicketDetailsRequest:
+      title: createTicketDetailsRequest
+      required:
+      - applicationdate
+      - relatedTo
+      - description
+      - howManyDaysClosed
+      - timeDays
+      type: object
+      properties:
+        applicationdate:
+          type: string
+        relatedTo:
+          type: string
+        description:
+          type: string
+        howManyDaysClosed:
+          type: integer
+          format: int32
+        timeDays:
+          type: integer
+          format: int32
+      example:
+        applicationdate: 31-07-2020
+        relatedTo: Network
+        description: facing some issues
+        howManyDaysClosed: 10
+        timeDays: 15
+    updateTicketDetailsRequest:
+      title: updateTicketDetailsRequest
+      required:
+      - applicationdate
+      - relatedTo
+      - description
+      type: object
+      properties:
+        applicationdate:
+          type: string
+        relatedTo:
+          type: string
+        description:
+          type: string
+      example:
+        applicationdate: 31/07/2000
+        relatedTo: Hardware
+        description: hardware problem
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: AllDetails
+  description: ''
